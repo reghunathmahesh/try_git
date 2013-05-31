@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<project name="simple-mail" default="run-test" basedir=".">
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="src.dir" value="${basedir}/src/com/selenium/googlesearch" />
+	<property name="lib.dir" value="${basedir}/lib" />
+
+	<fileset id="compile.libs" dir="${lib.dir}">
+		<include name="selenium-server-standalone-2.32.0.jar" />
+	</fileset>
+
+	<path id="classpath">
+		<pathelement location="${build.dir}/classes" />
+		<fileset refid="compile.libs" />
+	</path>
+
+	<!-- =============Initialise the required folder structure Target =========== -->
+	<target name="init" depends="clean" description="Create build directories">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/classes" />
+	</target>
+
+	<!-- ==================== Clean the folders=============================== -->
+	<target name="clean" description="Delete build directory">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ==================== Compiles the source file========================== -->
+	<target name="compile" depends="init" description="Compile Java source">
+		<javac includeantruntime="false" deprecation="true"
+			destdir="${build.dir}/classes" srcdir="${src.dir}" classpathref="classpath"
+			nowarn="true">
+		</javac>
+	</target>
+
+
+	<!-- ==================== Runs the tests using testng========================== -->
+	<target name="run-test" description="Google Search" depends="compile">
+		<java classname="com.selenium.googlesearch.GoogleSearch" classpathref="classpath">
+		</java>
+	</target>
+
+</project>
