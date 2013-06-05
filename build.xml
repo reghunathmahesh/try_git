@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<project name="simple-mail" default="run-test" basedir=".">
+<project name="Google Search" default="build" basedir=".">
 
 	<property name="build.dir" value="${basedir}/build" />
 	<property name="src.dir" value="${basedir}/src/com/selenium/googlesearch" />
@@ -37,7 +37,7 @@
 
 
 	<!-- ==================== Runs the tests using testng========================== -->
-	<target name="run-test" description="Google Search" depends="compile">
+	<target name="build" description="Google Search" depends="compile">
 		<java classname="com.selenium.googlesearch.GoogleSearch" classpathref="classpath">
 		</java>
 	</target>
