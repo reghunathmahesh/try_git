@@ -1,9 +1,15 @@
 package com.selenium.googlesearch;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -11,11 +17,17 @@ import org.testng.annotations.Test;
 public class GoogleSearch  {
     
 	@Test
-	public static void search() {
+	public static void search() throws MalformedURLException {
         // Create a new instance of the Firefox driver
         // Notice that the remainder of the code relies on the interface, 
         // not the implementation.
-        WebDriver driver = new FirefoxDriver();
+		DesiredCapabilities capabilities = null;
+
+		capabilities = DesiredCapabilities.firefox();
+		capabilities.setPlatform(Platform.ANY);
+		capabilities.setCapability(CapabilityType.TAKES_SCREENSHOT,
+				false);
+		RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:5555/wd/hub"), capabilities);
 
         // And now use this to visit Google
         driver.get("http://www.google.com");
