@@ -16,6 +16,10 @@
 		<fileset refid="compile.libs" />
 	</path>
 
+	<!-- ====================== Defines the testng task========================== -->
+	<taskdef name="testng" classpathref="classpath"
+		classname="com.beust.testng.TestNGAntTask" />
+	
 	<!-- =============Initialise the required folder structure Target =========== -->
 	<target name="init" depends="clean" description="Create build directories">
 		<mkdir dir="${build.dir}" />
@@ -38,8 +42,11 @@
 
 	<!-- ==================== Runs the tests using testng========================== -->
 	<target name="build" description="Google Search" depends="compile">
-		<java classname="com.selenium.googlesearch.GoogleSearch" classpathref="classpath">
-		</java>
+		<!-- <java classname="com.selenium.googlesearch.GoogleSearch" classpathref="classpath">
+		</java> -->
+		<testng classpathref="classpath" haltOnFailure="false" verbose="2" delegateCommandSystemProperties="true">
+			<xmlfileset dir="${basedir}" includes="testng.xml" />
+		</testng>
 	</target>
 
 </project>
