@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <project name="Google Search" default="build" basedir=".">
 
 	<property name="build.dir" value="${basedir}/build" />
@@ -9,6 +8,7 @@
 
 	<fileset id="compile.libs" dir="${lib.dir}">
 		<include name="selenium-server-standalone-2.32.0.jar" />
+		<include name ="testng.jar"/>
 	</fileset>
 
 	<path id="classpath">
@@ -19,7 +19,7 @@
 	<!-- ====================== Defines the testng task========================== -->
 	<taskdef name="testng" classpathref="classpath"
 		classname="com.beust.testng.TestNGAntTask" />
-	
+
 	<!-- =============Initialise the required folder structure Target =========== -->
 	<target name="init" depends="clean" description="Create build directories">
 		<mkdir dir="${build.dir}" />
@@ -42,11 +42,13 @@
 
 	<!-- ==================== Runs the tests using testng========================== -->
 	<target name="build" description="Google Search" depends="compile">
-		<!-- <java classname="com.selenium.googlesearch.GoogleSearch" classpathref="classpath">
+		<!-- <java classname="com.selenium.googlesearch.GoogleSearch"
+			classpathref="classpath">
 		</java> -->
-		<testng classpathref="classpath" haltOnFailure="false" verbose="2" delegateCommandSystemProperties="true">
+		<testng classpathref="classpath" haltOnFailure="false" verbose="2"
+			delegateCommandSystemProperties="true">
 			<xmlfileset dir="${basedir}" includes="testng.xml" />
 		</testng>
 	</target>
 
-</project>
+	</project>
