@@ -13,7 +13,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -25,13 +24,15 @@ public class GoogleSearch {
 
 	@Parameters({ "node" })
 	@BeforeClass
-	public void setUp(@Optional("http://10.2.0.93:5555/wd/hub") String node)
+	public void setUp(String node)
 			throws MalformedURLException {
 
 		capabilities = DesiredCapabilities.firefox();
 		capabilities.setPlatform(Platform.ANY);
 		capabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, false);
 		driver = new RemoteWebDriver(new URL(node), capabilities);
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test
