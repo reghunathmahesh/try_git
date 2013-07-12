@@ -1,1 +1,3 @@
 bin/
+src/com/selenium/googlesearch/GoogleSearch.java
+.gitignore
